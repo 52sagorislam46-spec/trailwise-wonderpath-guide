@@ -94,7 +94,7 @@ function Feed({
         <button
           onClick={onOpenNotifications}
           aria-label="Notifications"
-          className="relative w-9 h-9 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-500 active:scale-90 transition-transform"
+          className="ml-auto relative w-9 h-9 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-500 active:scale-90 transition-transform"
         >
           <Bell size={18} />
           {unreadCount > 0 && (
@@ -113,7 +113,7 @@ function Feed({
         <button
           onClick={onOpenMenu}
           aria-label="Menu"
-          className="ml-auto w-9 h-9 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-500 active:scale-90 transition-transform"
+          className="w-9 h-9 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-500 active:scale-90 transition-transform"
         >
           <Menu size={18} />
         </button>
