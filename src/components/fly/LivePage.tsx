@@ -62,11 +62,35 @@ function useMe(): Me | null {
   };
 }
 
-/** Header button: opens the live hub. Shows a red dot when someone is live. */
-export function LiveButton() {
+/**
+ * Live button. Two variants:
+ *  - "icon" (default): round header button.
+ *  - "row": full-width menu row.
+ * Shows a red dot when someone is live.
+ */
+export function LiveButton({ variant = "icon" }: { variant?: "icon" | "row" }) {
   const [open, setOpen] = useState(false);
   const [lives, setLives] = useState<LiveDoc[]>([]);
   useEffect(() => watchLives(setLives), []);
+  if (variant === "row") {
+    return (
+      <>
+        <button
+          onClick={() => setOpen(true)}
+          aria-label="Live"
+          className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
+        >
+          <Radio size={20} className="text-gray-500" />
+          <span className="text-sm font-medium">Live</span>
+          {lives.length > 0 && (
+            <span className="ml-auto w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
+          )}
+        </button>
+        {open && typeof document !== "undefined" &&
+          createPortal(<LiveHub lives={lives} onClose={() => setOpen(false)} />, document.body)}
+      </>
+    );
+  }
   return (
     <>
       <button

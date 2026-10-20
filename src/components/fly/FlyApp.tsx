@@ -20,7 +20,7 @@ import { MessagesPage } from "./MessagesPage";
 import { CallHistoryPage } from "./CallHistoryPage";
 import { ProfilePage } from "./ProfilePage";
 import { SearchPage } from "./SearchPage";
-import { LiveButton, LiveNowStrip } from "./LivePage";
+import { LiveNowStrip } from "./LivePage";
 import { PostCard } from "./PostCard";
 import { SuggestedUsers } from "./SuggestedUsers";
 import { ReelsPage } from "./ReelsPage";
@@ -91,9 +91,6 @@ function Feed({
           <Bird size={18} className="text-white" />
         </div>
         <h1 className="text-xl font-bold text-gray-900">Fly</h1>
-        <div className="ml-2">
-          <LiveButton />
-        </div>
         <button
           onClick={onOpenNotifications}
           aria-label="Notifications"
