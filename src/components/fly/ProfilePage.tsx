@@ -449,212 +449,208 @@ export function ProfilePage({
             className="absolute inset-0 bg-black/40"
             onClick={() => setShowMenu(false)}
           />
-          <div className="relative w-72 max-w-[85%] h-full bg-white shadow-xl flex flex-col">
-            <div className="h-14 px-4 flex items-center justify-between border-b border-gray-100">
-              <h2 className="text-lg font-bold text-gray-900">Menu</h2>
+          <div className="relative w-full max-w-md h-full bg-gray-100 shadow-2xl flex flex-col">
+            <div className="h-14 px-4 flex items-center justify-between bg-white border-b border-gray-100">
+              <h2 className="text-xl font-bold text-gray-900">Menu</h2>
               <button
                 onClick={() => setShowMenu(false)}
                 aria-label="Close menu"
-                className="text-gray-400"
+                className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-500"
               >
-                <X size={20} />
+                <X size={18} />
               </button>
             </div>
-            <div className="p-3 space-y-1 overflow-y-auto">
-              <LiveButton variant="row" />
-              <button
-                onClick={() => {
-                  setShowMenu(false);
-                  setShowWallet(true);
-                }}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-              >
-                <Wallet size={20} className="text-gray-500" />
-                <span className="text-sm font-medium">My Wallet</span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowMenu(false);
-                  setShowCreatorDashboard(true);
-                }}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-              >
-                <BadgeCheck size={20} className="text-gray-500" />
-                <span className="text-sm font-medium">Creator Dashboard</span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowMenu(false);
-                  setShowAI(true);
-                }}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-              >
-                <Bot size={20} className="text-gray-500" />
-                <span className="text-sm font-medium">Fly AI</span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowMenu(false);
-                  setShowHelp(true);
-                }}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-              >
-                <LifeBuoy size={20} className="text-gray-500" />
-                <span className="text-sm font-medium">Help Center</span>
-              </button>
-              <a
-                href="/agro"
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-              >
-                <Sprout size={20} className="text-gray-500" />
-                <span className="text-sm font-medium">Fly Agro — কৃষকের বন্ধু</span>
-              </a>
-              <button
-                onClick={() => setShowSettingsMenu((v) => !v)}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-              >
-                <GraduationCap size={20} className="text-gray-500" />
-                <span className="text-sm font-medium">Settings</span>
-              </button>
-              {showSettingsMenu && (
-                <div className="mx-3 mb-1 rounded-xl border border-gray-100 overflow-hidden">
-                  <a
-                    href="/study"
-                    className="w-full flex items-center gap-3 px-3 py-3 text-left text-gray-800 hover:bg-gray-50"
-                  >
-                    <Swords size={18} className="text-gray-500" />
-                    <span className="text-sm font-medium">Fly Arena</span>
-                  </a>
-                </div>
-              )}
-              <button
-                onClick={() => {
-                  setShowMenu(false);
-                  setShowEditPage(true);
-                }}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-              >
-                <Settings size={20} className="text-gray-500" />
-                <span className="text-sm font-medium">Edit profile</span>
-              </button>
-              <button
-                onClick={() => {
-                  setShowMenu(false);
-                  setShowNotifySettings(true);
-                }}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-              >
-                <Bell size={20} className="text-gray-500" />
-                <span className="text-sm font-medium">Notification settings</span>
-              </button>
-              <button
-                onClick={() => setShowLanguage((v) => !v)}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-              >
-                <Globe size={20} className="text-gray-500" />
-                <span className="text-sm font-medium flex-1">Language</span>
-                <span className="text-xs text-gray-400">
-                  {languageLabel(language)}
-                </span>
-              </button>
-              {showLanguage && (
-                <div className="mx-3 mb-1 rounded-xl border border-gray-100 overflow-y-auto max-h-72 notranslate" translate="no">
-                  {LANGUAGES.map((l) => (
-                    <button
-                      key={l.code}
-                      onClick={() => {
-                        setLanguage(l.code);
-                        setShowLanguage(false);
-                        changeLanguage(l.code);
-                      }}
-                      className={`w-full flex items-center justify-between px-4 py-2.5 text-sm hover:bg-gray-50 ${
-                        language === l.code
-                          ? "text-sky-600 font-semibold"
-                          : "text-gray-700"
-                      }`}
+            <div className="flex-1 overflow-y-auto p-3 space-y-3">
+              <div className="grid grid-cols-2 gap-2">
+                <LiveButton variant="tile" />
+                <MenuTile
+                  icon={Wallet}
+                  gradient="from-amber-400 to-orange-500"
+                  label="My Wallet"
+                  onClick={() => {
+                    setShowMenu(false);
+                    setShowWallet(true);
+                  }}
+                />
+                <MenuTile
+                  icon={BadgeCheck}
+                  gradient="from-violet-500 to-purple-600"
+                  label="Creator Dashboard"
+                  onClick={() => {
+                    setShowMenu(false);
+                    setShowCreatorDashboard(true);
+                  }}
+                />
+                <MenuTile
+                  icon={Bot}
+                  gradient="from-sky-400 to-blue-600"
+                  label="Fly AI"
+                  onClick={() => {
+                    setShowMenu(false);
+                    setShowAI(true);
+                  }}
+                />
+                <MenuTile
+                  icon={LifeBuoy}
+                  gradient="from-cyan-400 to-sky-600"
+                  label="Help Center"
+                  onClick={() => {
+                    setShowMenu(false);
+                    setShowHelp(true);
+                  }}
+                />
+                <MenuTile
+                  icon={Sprout}
+                  gradient="from-green-400 to-emerald-600"
+                  label="Fly Agro"
+                  href="/agro"
+                />
+                <MenuTile
+                  icon={Settings}
+                  gradient="from-slate-400 to-gray-600"
+                  label="Edit profile"
+                  onClick={() => {
+                    setShowMenu(false);
+                    setShowEditPage(true);
+                  }}
+                />
+                <MenuTile
+                  icon={Bell}
+                  gradient="from-pink-400 to-rose-600"
+                  label="Notification settings"
+                  onClick={() => {
+                    setShowMenu(false);
+                    setShowNotifySettings(true);
+                  }}
+                />
+              </div>
+              <div className="space-y-2">
+                <MenuRow
+                  icon={GraduationCap}
+                  gradient="from-indigo-400 to-violet-600"
+                  onClick={() => setShowSettingsMenu((v) => !v)}
+                >
+                  <span className="text-sm font-medium flex-1">Settings</span>
+                </MenuRow>
+                {showSettingsMenu && (
+                  <div className="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden">
+                    <a
+                      href="/study"
+                      className="w-full flex items-center gap-3 px-4 py-3 text-left text-gray-800 hover:bg-gray-50"
                     >
-                      <span>{l.label}</span>
-                      {language === l.code && <Check size={16} />}
-                    </button>
-                  ))}
-                </div>
-              )}
-              <button
-                onClick={toggleDark}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-              >
-                <Moon size={20} className="text-gray-500" />
-                <span className="text-sm font-medium flex-1">Dark theme</span>
-                <span
-                  className={`w-10 h-6 rounded-full flex items-center px-0.5 transition-colors ${
-                    dark ? "bg-sky-500" : "bg-gray-200"
-                  }`}
+                      <Swords size={18} className="text-gray-500" />
+                      <span className="text-sm font-medium">Fly Arena</span>
+                    </a>
+                  </div>
+                )}
+                <MenuRow
+                  icon={Globe}
+                  gradient="from-teal-400 to-cyan-600"
+                  onClick={() => setShowLanguage((v) => !v)}
                 >
+                  <span className="text-sm font-medium flex-1">Language</span>
+                  <span className="text-xs text-gray-400">
+                    {languageLabel(language)}
+                  </span>
+                </MenuRow>
+                {showLanguage && (
+                  <div
+                    className="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-y-auto max-h-72 notranslate"
+                    translate="no"
+                  >
+                    {LANGUAGES.map((l) => (
+                      <button
+                        key={l.code}
+                        onClick={() => {
+                          setLanguage(l.code);
+                          setShowLanguage(false);
+                          changeLanguage(l.code);
+                        }}
+                        className={`w-full flex items-center justify-between px-4 py-2.5 text-sm hover:bg-gray-50 ${
+                          language === l.code
+                            ? "text-sky-600 font-semibold"
+                            : "text-gray-700"
+                        }`}
+                      >
+                        <span>{l.label}</span>
+                        {language === l.code && <Check size={16} />}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                <MenuRow
+                  icon={Moon}
+                  gradient="from-blue-500 to-indigo-700"
+                  onClick={toggleDark}
+                >
+                  <span className="text-sm font-medium flex-1">Dark theme</span>
                   <span
-                    className={`w-5 h-5 rounded-full bg-white shadow transition-transform ${
-                      dark ? "translate-x-4" : ""
+                    className={`w-10 h-6 rounded-full flex items-center px-0.5 transition-colors ${
+                      dark ? "bg-sky-500" : "bg-gray-200"
                     }`}
-                  />
-                </span>
-              </button>
-              {isAdmin(myProfile, user?.email) && (
+                  >
+                    <span
+                      className={`w-5 h-5 rounded-full bg-white shadow transition-transform ${
+                        dark ? "translate-x-4" : ""
+                      }`}
+                    />
+                  </span>
+                </MenuRow>
+                {isAdmin(myProfile, user?.email) && (
+                  <>
+                    <MenuRow
+                      icon={Wallet}
+                      gradient="from-amber-400 to-orange-500"
+                      onClick={() => {
+                        setShowMenu(false);
+                        setShowWithdrawals(true);
+                      }}
+                    >
+                      <span className="text-sm font-medium flex-1">Withdrawal Requests</span>
+                    </MenuRow>
+                    <MenuRow
+                      icon={Rocket}
+                      gradient="from-orange-400 to-red-500"
+                      onClick={() => {
+                        setShowMenu(false);
+                        setShowBoosts(true);
+                      }}
+                    >
+                      <span className="text-sm font-medium flex-1">Boost Requests</span>
+                    </MenuRow>
+                    <MenuRow
+                      icon={BadgeDollarSign}
+                      gradient="from-emerald-400 to-green-600"
+                      onClick={() => {
+                        setShowMenu(false);
+                        setShowMonetization(true);
+                      }}
+                    >
+                      <span className="text-sm font-medium flex-1">Monetization Control</span>
+                    </MenuRow>
+                    <MenuRow
+                      icon={Users}
+                      gradient="from-blue-400 to-indigo-600"
+                      onClick={() => {
+                        setShowMenu(false);
+                        setShowMembers(true);
+                      }}
+                    >
+                      <span className="text-sm font-medium flex-1">Members</span>
+                    </MenuRow>
+                  </>
+                )}
                 <button
                   onClick={() => {
                     setShowMenu(false);
-                    setShowWithdrawals(true);
+                    logOut();
                   }}
-                  className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm text-left text-rose-600 hover:bg-rose-50 transition-colors"
                 >
-                  <Wallet size={20} className="text-gray-500" />
-                  <span className="text-sm font-medium">Withdrawal Requests</span>
+                  <LogOut size={18} />
+                  <span className="text-sm font-medium">Log out</span>
                 </button>
-              )}
-              {isAdmin(myProfile, user?.email) && (
-                <button
-                  onClick={() => {
-                    setShowMenu(false);
-                    setShowBoosts(true);
-                  }}
-                  className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-                >
-                  <Rocket size={20} className="text-gray-500" />
-                  <span className="text-sm font-medium">Boost Requests</span>
-                </button>
-              )}
-              {isAdmin(myProfile, user?.email) && (
-                <button
-                  onClick={() => {
-                    setShowMenu(false);
-                    setShowMonetization(true);
-                  }}
-                  className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-                >
-                  <BadgeDollarSign size={20} className="text-gray-500" />
-                  <span className="text-sm font-medium">Monetization Control</span>
-                </button>
-              )}
-              {isAdmin(myProfile, user?.email) && (
-                <button
-                  onClick={() => {
-                    setShowMenu(false);
-                    setShowMembers(true);
-                  }}
-                  className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-gray-800 hover:bg-gray-50"
-                >
-                  <Users size={20} className="text-gray-500" />
-                  <span className="text-sm font-medium">Members</span>
-                </button>
-              )}
-              <button
-                onClick={() => {
-                  setShowMenu(false);
-                  logOut();
-                }}
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left text-rose-600 hover:bg-rose-50"
-              >
-                <LogOut size={20} />
-                <span className="text-sm font-medium">Log out</span>
-              </button>
+              </div>
             </div>
           </div>
         </div>
