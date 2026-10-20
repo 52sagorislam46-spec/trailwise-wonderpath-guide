@@ -63,15 +63,39 @@ function useMe(): Me | null {
 }
 
 /**
- * Live button. Two variants:
+ * Live button. Three variants:
  *  - "icon" (default): round header button.
  *  - "row": full-width menu row.
+ *  - "tile": premium grid tile for the Fly menu.
  * Shows a red dot when someone is live.
  */
-export function LiveButton({ variant = "icon" }: { variant?: "icon" | "row" }) {
+export function LiveButton({ variant = "icon" }: { variant?: "icon" | "row" | "tile" }) {
   const [open, setOpen] = useState(false);
   const [lives, setLives] = useState<LiveDoc[]>([]);
   useEffect(() => watchLives(setLives), []);
+  if (variant === "tile") {
+    return (
+      <>
+        <button
+          onClick={() => setOpen(true)}
+          aria-label="Live"
+          className="rounded-2xl bg-white border border-gray-100 shadow-sm p-3 flex flex-col items-start gap-2.5 text-left hover:bg-gray-50 active:scale-[0.97] transition-all"
+        >
+          <span className="w-11 h-11 rounded-2xl bg-gradient-to-br from-rose-500 to-red-500 flex items-center justify-center text-white shadow-md">
+            <Radio size={22} />
+          </span>
+          <span className="text-[13px] font-semibold text-gray-800 leading-tight flex items-center gap-1.5">
+            Live
+            {lives.length > 0 && (
+              <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
+            )}
+          </span>
+        </button>
+        {open && typeof document !== "undefined" &&
+          createPortal(<LiveHub lives={lives} onClose={() => setOpen(false)} />, document.body)}
+      </>
+    );
+  }
   if (variant === "row") {
     return (
       <>

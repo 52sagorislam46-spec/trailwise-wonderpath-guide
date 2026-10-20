@@ -1,7 +1,7 @@
 import { LANGUAGES, changeLanguage, languageLabel } from "../../lib/appLanguage";
 import { AddMoneyCard } from "./AddMoneyCard";
 import { UserBadges } from "./badges";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ComponentType, type ReactNode } from "react";
 import { ArrowLeft, BadgeCheck, Bell, Check, Eye, Globe, GraduationCap, LayoutGrid, LogOut, Menu, MessageCircle, Moon, Play, Rows3, Settings, Share2, ShoppingBag, SquarePlay, Users, UserSquare, X } from "lucide-react";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../lib/firebase";
@@ -32,6 +32,73 @@ import { useDarkMode } from "./theme";
 import { isAdmin } from "./admins";
 import { useBackClose } from "./useBackClose";
 import type { UserProfile } from "./types";
+
+/** Facebook-style premium menu tile with a colorful gradient icon. */
+function MenuTile({
+  icon: Icon,
+  gradient,
+  label,
+  onClick,
+  href,
+}: {
+  icon: ComponentType<{ size?: number; className?: string }>;
+  gradient: string;
+  label: string;
+  onClick?: () => void;
+  href?: string;
+}) {
+  const cls =
+    "rounded-2xl bg-white border border-gray-100 shadow-sm p-3 flex flex-col items-start gap-2.5 text-left hover:bg-gray-50 active:scale-[0.97] transition-all";
+  const inner = (
+    <>
+      <span
+        className={`w-11 h-11 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center text-white shadow-md`}
+      >
+        <Icon size={22} />
+      </span>
+      <span className="text-[13px] font-semibold text-gray-800 leading-tight">
+        {label}
+      </span>
+    </>
+  );
+  return href ? (
+    <a href={href} className={cls}>
+      {inner}
+    </a>
+  ) : (
+    <button type="button" onClick={onClick} className={cls}>
+      {inner}
+    </button>
+  );
+}
+
+/** Full-width menu card row with a gradient icon chip. */
+function MenuRow({
+  icon: Icon,
+  gradient,
+  onClick,
+  children,
+}: {
+  icon: ComponentType<{ size?: number; className?: string }>;
+  gradient: string;
+  onClick?: () => void;
+  children: ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm text-left text-gray-800 hover:bg-gray-50 transition-colors"
+    >
+      <span
+        className={`w-9 h-9 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center text-white shadow-sm shrink-0`}
+      >
+        <Icon size={18} />
+      </span>
+      {children}
+    </button>
+  );
+}
 
 export function ProfilePage({
   uid,
