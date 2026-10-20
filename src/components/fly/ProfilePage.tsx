@@ -18,6 +18,7 @@ import { EditProfilePage } from "./EditProfilePage";
 import { MembersPage } from "./MembersPage";
 import { CreatorDashboardPage } from "./CreatorDashboardPage";
 import { WalletPage } from "./WalletPage";
+import { LiveButton } from "./LivePage";
 import { FlyAIPage } from "./FlyAIPage";
 import { HelpCenterPage } from "./HelpCenterPage";
 import { WithdrawalRequestsPage } from "./WithdrawalRequestsPage";
@@ -393,6 +394,7 @@ export function ProfilePage({
               </button>
             </div>
             <div className="p-3 space-y-1 overflow-y-auto">
+              <LiveButton variant="row" />
               <button
                 onClick={() => {
                   setShowMenu(false);
