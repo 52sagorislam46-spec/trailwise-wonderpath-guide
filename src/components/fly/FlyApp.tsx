@@ -20,7 +20,7 @@ import { MessagesPage } from "./MessagesPage";
 import { CallHistoryPage } from "./CallHistoryPage";
 import { ProfilePage } from "./ProfilePage";
 import { SearchPage } from "./SearchPage";
-import { LiveButton, LiveNowStrip } from "./LivePage";
+import { LiveNowStrip } from "./LivePage";
 import { PostCard } from "./PostCard";
 import { SuggestedUsers } from "./SuggestedUsers";
 import { ReelsPage } from "./ReelsPage";
